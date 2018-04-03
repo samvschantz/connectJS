@@ -23,4 +23,5 @@ knex.select('*').from('famous_people').where(`first_name`, `like` ,`%${name}%`)
       let birthdate = person.birthdate.toISOString().slice(0,10)
       console.log(`-${res.indexOf(person) + 1}: ${first_name} ${last_name}, born '${birthdate}'`)
     }
+    knex.destroy()
   });
