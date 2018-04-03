@@ -19,9 +19,18 @@ client.connect((err) => {
     if (err) {
       return console.error("error running query", err);
     }
-    client.query('SELECT * FROM famous_people;', (err, result) => {
+    console.log('Searching...')
+    client.query(`SELECT * FROM famous_people WHERE first_name LIKE '%${name}%' OR last_name LIKE '%${name}%;';`, (err, result) => {
       if (err) throw err;
-      console.log(result);
+      const rows = result.rows
+      console.log(`Found ${result.rowCount} person(s) by the name '${name}':`)
+      for (let row of rows){
+        let first_name = row.first_name
+        let last_name = row.last_name
+        let birthdate = row.birthdate
+        let num = (rows.indexOf(row)) + 1
+        console.log(`-${num}: ${first_name} ${last_name}, born '${birthdate}'`)
+      }
       client.end();
     });
   });
