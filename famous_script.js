@@ -27,7 +27,7 @@ client.connect((err) => {
       for (let row of rows){
         let first_name = row.first_name
         let last_name = row.last_name
-        let birthdate = row.birthdate
+        let birthdate = row.birthdate.toISOString().slice(0,10)
         let num = (rows.indexOf(row)) + 1
         console.log(`-${num}: ${first_name} ${last_name}, born '${birthdate}'`)
       }
